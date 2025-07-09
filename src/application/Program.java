@@ -2,6 +2,7 @@ package application;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ import model.dao.DaoFactory;
 import model.dao.DriverDao;
 import model.dao.OutsideDao;
 import model.dao.TruckDao;
+import utils.Validate;
 
 public class Program {
 
@@ -28,9 +30,9 @@ public class Program {
 		while (true) {
 			System.out.println("|_______________________________________|");
 			System.out.println("|                                       |");
-			System.out.println("|------------Outside Control------------|");
-			System.out.println();
-			System.out.println();
+			System.out.println("|---------Saídas dos Motoristas---------|");
+			System.out.println("|                                       |");
+			System.out.println("|                                       |");
 			System.out.println("|------------Registar Saída--------[1]--|");
 			System.out.println("|------------Registar Motorista----[2]--|");
 			System.out.println("|------------Registar Camião-------[3]--|");
@@ -54,30 +56,48 @@ public class Program {
 
 			switch (resp) {
 			case 1: {
-				System.out.print("Data[dd/mm/aaaa]: ");
-				String dateStr = sc.next();
-				sc.nextLine();
-				System.out.print("Local: ");
-				String local = sc.nextLine();
-				System.out.print("Id do motorista: ");
-				int id = sc.nextInt();
 				
-				Driver dv = driverDao.findByid(id);
 				
-				LocalDate date = LocalDate.parse(dateStr, fmt);
-				Outside out = new Outside(date, local, dv);
-				outsideDao.insert(out);
+				try {
+					System.out.print("Data[dd/mm/aaaa]: ");
+					String dateStr = sc.next();
+					
+					LocalDate date = Validate.date(dateStr, fmt);
+					sc.nextLine();
+					System.out.print("Local: ");
+					String local = sc.nextLine();
+					System.out.print("Id do motorista: ");
+					int id = sc.nextInt();
+					
+					Driver dv = driverDao.findByid(id);
+					
+					
+					Outside out = new Outside(date, local, dv);
+					outsideDao.insert(out);
+					
+				} catch (Exception e) {
+					System.out.println("Erro ao registar saída: " + e.getMessage());
+				}
+				
 				
 				break;
 			}
 			case 2: {
-			
-				System.out.println();
-				System.out.print("Nome: ");
-				String name = sc.nextLine();
 				
-				Driver dv = new Driver(name, null);
-				driverDao.insert(dv);
+				try {
+					System.out.println();
+					System.out.print("Nome: ");
+					String name = sc.nextLine();
+					Validate.name(name);
+					
+					Driver dv = new Driver(name, null);
+					driverDao.insert(dv);
+
+				} catch (Exception e) {
+					System.out.println("Erro ao inserir motorista: " +e.getMessage());
+				}
+			
+				
 
 				break;
 			}
@@ -86,6 +106,8 @@ public class Program {
 				System.out.println();
 				System.out.print("Matricula: ");
 				String plate = sc.next();
+				Validate.plate(plate);
+				
 				sc.nextLine();
 				System.out.print("Marca: ");
 				String brand = sc.nextLine();
@@ -96,6 +118,9 @@ public class Program {
 					System.out.println("Id do motorista: ");
 					int id = sc.nextInt();
 					Driver driver = driverDao.findByid(id);
+					if (driver == null) {
+						throw new IllegalArgumentException("Motorista com esse ID não existe!");
+					}
 					Truck truck = new Truck(plate, null, brand, driver);
 					truckDao.insert(truck);
 				}
@@ -180,12 +205,11 @@ public class Program {
 			}
 			
 			case 11: {
-			
-				
+
 				System.out.print("Insira data[dd/mm/aaaa]: ");
 				String date = sc.next();
-				System.out.println();
-				LocalDate outDate = LocalDate.parse(date, fmt);
+				LocalDate outDate = Validate.date(date, fmt);
+
 				List<Outside> list = outsideDao.findByOutside(outDate);
 				
 				for (Outside out : list) {
@@ -196,16 +220,19 @@ public class Program {
 			}
 			
 			case 12: {
-				System.out.println("Ending....");
+				System.out.println("A sair....");
 				sc.close();
 				return;
 			}
 
 			default:
-				System.out.print("Invalid option, try again: ");
+				System.out.print("Opção inválida, tenta outra vez: ");
 			}
 		}
-
 	}
+	
+	
+	
+	
 
 }

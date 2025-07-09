@@ -1,0 +1,15 @@
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\application\Program.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\db\DB.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\db\DbException.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\db\DbIntegrityException.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\entities\Driver.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\entities\Outside.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\entities\Truck.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\DaoFactory.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\DriverDao.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\OutsideDao.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\TruckDao.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\impl\DriverDaoJDBC.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\impl\OutsideDaoJDBC.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\model\dao\impl\TruckDaoJDBC.java
+C:\Users\puto_\OneDrive\Documentos\JAVA\Projects\drivers_outside_jdbc\src\utils\Validate.java
